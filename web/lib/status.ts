@@ -2,7 +2,10 @@ export const STATUSES = ["new", "confirmed", "shipped", "delivered", "refused", 
 export type Status = (typeof STATUSES)[number];
 
 /** Mirrors the API rules, only to decide which buttons to show. The API stays the source of truth. */
-export const NEXT: Record<Status, Status[]> = {
+/** A status an order can be moved to (nothing moves back to "new"). */
+export type Target = Exclude<Status, "new">;
+
+export const NEXT: Record<Status, Target[]> = {
   new: ["confirmed", "refused"],
   confirmed: ["shipped", "refused"],
   shipped: ["delivered", "refused"],
