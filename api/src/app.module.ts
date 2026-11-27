@@ -8,6 +8,8 @@ import { Db } from "./db/db";
 import { PermissionGuard } from "./permissions/permission.guard";
 import { PermissionsController } from "./permissions/permissions.controller";
 import { PermissionsService } from "./permissions/permissions.service";
+import { OrdersController } from "./orders/orders.controller";
+import { OrdersService } from "./orders/orders.service";
 import { HealthController } from "./health.controller";
 
 @Module({})
@@ -15,9 +17,9 @@ export class AppModule {
   static register(db: Db, config: Config): DynamicModule {
     return {
       module: AppModule,
-      controllers: [HealthController, AuthController, PermissionsController],
+      controllers: [HealthController, AuthController, PermissionsController, OrdersController],
       // useFactory, not useValue: Nest serialises useValue providers to hash the module, which fails on a big object like a database handle.
-      providers: [{ provide: DB, useFactory: () => db }, { provide: CONFIG, useFactory: () => config }, AuthService, AuthGuard, PermissionsService, PermissionGuard],
+      providers: [{ provide: DB, useFactory: () => db }, { provide: CONFIG, useFactory: () => config }, AuthService, AuthGuard, PermissionsService, PermissionGuard, OrdersService],
     };
   }
 }

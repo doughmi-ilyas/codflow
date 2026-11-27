@@ -1,4 +1,5 @@
 import bcrypt from "bcryptjs";
+import { BCRYPT_ROUNDS } from "./common/crypto";
 import { Db } from "./db/db";
 
 export const PERMISSIONS = [
@@ -30,7 +31,7 @@ export interface NewTenant {
 
 /** Provisioning runs as the database owner (no tenant context): it creates the tenant, its owner and default permissions. */
 export async function provisionTenant(db: Db, t: NewTenant): Promise<{ tenantId: string; ownerId: string }> {
-  const hash = await bcrypt.hash(t.owner.password, 10);
+  const hash = await bcrypt.hash(t.owner.password, BCRYPT_ROUNDS);
   return db.tx(async (tx) => {
     const [tenant] = await tx.query<{ id: string }>(
       "INSERT INTO tenants (slug, name, currency) VALUES ($1, $2, $3) RETURNING id",

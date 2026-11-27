@@ -1,12 +1,13 @@
 import { Inject, Injectable, UnauthorizedException } from "@nestjs/common";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { BCRYPT_ROUNDS } from "../common/crypto";
 import { CONFIG, DB } from "../common/tokens";
 import { Config } from "../config";
 import { Db, withTenant } from "../db/db";
 
 // Compared against when the user does not exist, so both failures take about the same time.
-const DUMMY_HASH = bcrypt.hashSync("not-a-real-password", 10);
+const DUMMY_HASH = bcrypt.hashSync("not-a-real-password", BCRYPT_ROUNDS);
 
 @Injectable()
 export class AuthService {
