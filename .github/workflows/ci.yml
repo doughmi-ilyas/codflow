@@ -52,6 +52,41 @@ jobs:
       - run: npm test
       - run: npm run build
 
+  e2e:
+    runs-on: ubuntu-latest
+    needs: [api, web]
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: codflow
+          POSTGRES_PASSWORD: codflow
+          POSTGRES_DB: codflow
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U codflow" --health-interval 5s --health-timeout 3s --health-retries 10
+    env:
+      DATABASE_URL: postgres://codflow:codflow@localhost:5432/codflow
+      JWT_SECRET: ci-only-secret-not-used-anywhere-else
+      API_URL: http://localhost:3001
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+        working-directory: api
+      - run: npm run build && npm run seed
+        working-directory: api
+      - run: npm ci && npm run build
+        working-directory: web
+      - name: Start API and web, then run the end-to-end smoke test
+        run: |
+          (cd api && node dist/main.js > ../api.log 2>&1 &)
+          (cd web && npm start > ../web.log 2>&1 &)
+          for i in $(seq 1 60); do curl -sf localhost:3001/health && curl -sf -o /dev/null localhost:3000/fr/login && break; sleep 2; done
+          ./scripts/smoke.sh || (tail -50 api.log web.log; exit 1)
+
   docker:
     runs-on: ubuntu-latest
     needs: [api, web]
