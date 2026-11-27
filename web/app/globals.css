@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+:root { color-scheme: light; }
+body { @apply bg-slate-50 text-slate-900 antialiased; }
+/* Logical properties (ms-, me-, ps-, pe-, text-start) are used throughout so Arabic (RTL) mirrors correctly. */
