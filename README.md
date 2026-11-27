@@ -43,6 +43,8 @@ DATABASE_URL=postgres://codflow:codflow@localhost:5432/codflow JWT_SECRET=$JWT_S
 
 Then open <http://localhost:3000>: shop `atlas-shop`, user `owner@atlas-shop.test`, password `demo-password` (also `manager@`, `agent@`, `courier@` with the same shop). Without Docker: `cd api && npm run dev` and `cd web && API_URL=http://localhost:3001 npm run dev`. Configuration is listed in `api/.env.example`. The compose file exposes no database port, so to seed from your machine add `ports: ["5432:5432"]` to the `db` service.
 
+Deploying on DockHosting (managed PostgreSQL, one project per folder): see [docs/deploy-dockhosting.md](docs/deploy-dockhosting.md).
+
 ## API
 
 | Method and path | Needs | What |
