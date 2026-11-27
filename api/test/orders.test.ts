@@ -148,3 +148,13 @@ describe("delivery workflow", () => {
     expect((await api("get", "/orders/not-a-uuid", "owner@a.test")).status).toBe(400);
   });
 });
+
+describe("couriers list", () => {
+  it("a manager sees the couriers (no password hashes), an agent is refused", async () => {
+    const ok = await api("get", "/users/couriers", "manager@a.test");
+    expect(ok.status).toBe(200);
+    expect(ok.body.map((u: any) => u.full_name).sort()).toEqual(["courier1@a.test", "courier2@a.test"]);
+    expect(JSON.stringify(ok.body)).not.toContain("password");
+    expect((await api("get", "/users/couriers", "agent@a.test")).status).toBe(403);
+  });
+});
