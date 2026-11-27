@@ -35,9 +35,27 @@ jobs:
           TEST_DATABASE_URL: postgres://codflow:codflow@localhost:5432/codflow_test
       - run: npm run build
 
+  web:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+
   docker:
     runs-on: ubuntu-latest
-    needs: api
+    needs: [api, web]
     steps:
       - uses: actions/checkout@v4
       - run: docker build -t codflow-api ./api
+      - run: docker build -t codflow-web ./web
