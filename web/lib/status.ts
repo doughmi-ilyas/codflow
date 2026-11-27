@@ -14,6 +14,15 @@ export const NEXT: Record<Status, Target[]> = {
   returned: [],
 };
 
+export const DOT: Record<Status, string> = {
+  new: "bg-slate-400",
+  confirmed: "bg-blue-500",
+  shipped: "bg-amber-500",
+  delivered: "bg-emerald-500",
+  refused: "bg-rose-500",
+  returned: "bg-purple-500",
+};
+
 export const BADGE: Record<Status, string> = {
   new: "bg-slate-100 text-slate-700",
   confirmed: "bg-blue-100 text-blue-800",
