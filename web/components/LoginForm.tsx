@@ -25,14 +25,15 @@ export default function LoginForm({ locale }: { locale: Locale }) {
     router.refresh();
   }
 
-  const field = "mt-1 w-full rounded border px-3 py-2";
+  const label = "block text-sm font-medium text-slate-700";
+  const field = "mt-1.5 w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm shadow-sm transition placeholder:text-slate-400 focus:border-brand-500 focus:outline-none focus:ring-4 focus:ring-brand-100";
   return (
-    <form onSubmit={submit} className="space-y-3">
-      <label className="block text-sm">{d.login.tenant}<input name="tenant" required className={field} dir="ltr" /></label>
-      <label className="block text-sm">{d.login.email}<input name="email" type="email" required className={field} dir="ltr" /></label>
-      <label className="block text-sm">{d.login.password}<input name="password" type="password" required className={field} dir="ltr" /></label>
-      {error && <p role="alert" className="text-sm text-rose-700">{d.login.error}</p>}
-      <button disabled={busy} className="w-full rounded bg-slate-900 py-2 text-white disabled:opacity-60">{d.login.submit}</button>
+    <form onSubmit={submit} className="space-y-4">
+      <label className={label}>{d.login.tenant}<input name="tenant" required autoComplete="organization" placeholder="atlas-shop" className={field} dir="ltr" /></label>
+      <label className={label}>{d.login.email}<input name="email" type="email" required autoComplete="username" className={field} dir="ltr" /></label>
+      <label className={label}>{d.login.password}<input name="password" type="password" required autoComplete="current-password" className={field} dir="ltr" /></label>
+      {error && <p role="alert" className="rounded-lg bg-rose-50 px-3 py-2 text-sm text-rose-700">{d.login.error}</p>}
+      <button disabled={busy} className="w-full rounded-lg bg-brand-600 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-brand-700 disabled:opacity-60">{d.login.submit}</button>
     </form>
   );
 }
