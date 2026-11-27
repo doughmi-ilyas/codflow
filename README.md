@@ -1,5 +1,9 @@
 # CODFlow
 
+**Live demo: <https://codflow-web.dockhosting.cloud/fr/login>** (hosted on DockHosting)
+
+There is no sign-up page, so use the demo account. Shop `atlas-shop`, email `owner@atlas-shop.test`, password `demo-password` (role: owner). Other roles on the same shop: `manager@`, `agent@`, `courier@atlas-shop.test`, same password. It is a shared demo: please do not enter real data, and expect the first request after a pause to be slow.
+
 Multi-tenant **cash-on-delivery (COD) order management**: a NestJS + PostgreSQL API and a Next.js web app in French, English and Arabic (right-to-left).
 
 Several shops share one database and never see each other's data. Inside a shop, each role (owner, manager, agent, courier) sees and does only what the owner allows. An order moves through a fixed delivery workflow, and the cash couriers collect is tracked against what was expected.

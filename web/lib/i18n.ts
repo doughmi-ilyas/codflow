@@ -6,6 +6,7 @@ export const dirOf = (l: Locale) => (l === "ar" ? "rtl" : "ltr");
 
 const fr = {
   appName: "CODFlow",
+  demo: { title: "Compte de démonstration", hint: "Pas d'inscription : utilisez ce compte pour explorer l'application.", use: "Remplir automatiquement", role: "Rôle : propriétaire" },
   login: { title: "Connexion", tenant: "Boutique", email: "E-mail", password: "Mot de passe", submit: "Se connecter", error: "Identifiants invalides" },
   nav: { dashboard: "Tableau de bord", orders: "Commandes", logout: "Déconnexion" },
   role: { owner: "Propriétaire", manager: "Responsable", agent: "Agent", courier: "Livreur" },
@@ -25,6 +26,7 @@ type Dict = typeof fr;
 
 const en: Dict = {
   appName: "CODFlow",
+  demo: { title: "Demo account", hint: "There is no sign-up: use this account to explore the app.", use: "Fill in automatically", role: "Role: owner" },
   login: { title: "Sign in", tenant: "Shop", email: "Email", password: "Password", submit: "Sign in", error: "Invalid credentials" },
   nav: { dashboard: "Dashboard", orders: "Orders", logout: "Sign out" },
   role: { owner: "Owner", manager: "Manager", agent: "Agent", courier: "Courier" },
@@ -42,6 +44,7 @@ const en: Dict = {
 
 const ar: Dict = {
   appName: "CODFlow",
+  demo: { title: "حساب تجريبي", hint: "لا يوجد تسجيل: استعمل هذا الحساب لاستكشاف التطبيق.", use: "تعبئة تلقائية", role: "الدور: مالك" },
   login: { title: "تسجيل الدخول", tenant: "المتجر", email: "البريد الإلكتروني", password: "كلمة المرور", submit: "دخول", error: "بيانات الدخول غير صحيحة" },
   nav: { dashboard: "لوحة التحكم", orders: "الطلبات", logout: "تسجيل الخروج" },
   role: { owner: "المالك", manager: "المسؤول", agent: "موظف", courier: "الموزّع" },

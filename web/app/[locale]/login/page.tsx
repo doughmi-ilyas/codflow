@@ -10,6 +10,8 @@ export default async function LoginPage({ params }: { params: Promise<{ locale: 
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const d = t(locale);
+  // Runtime switch for a public demo instance: DEMO_HINT=true shows the shared demo login on this page.
+  const demo = process.env.DEMO_HINT === "true" ? { tenant: "atlas-shop", email: "owner@atlas-shop.test", password: "demo-password" } : undefined;
   const points = [
     { icon: <IconOrders />, text: d.brand.p1 },
     { icon: <IconScale />, text: d.brand.p2 },
@@ -41,7 +43,7 @@ export default async function LoginPage({ params }: { params: Promise<{ locale: 
         </div>
         <div className="m-auto w-full max-w-sm">
           <h1 className="text-2xl font-semibold tracking-tight">{d.login.title}</h1>
-          <div className="mt-6"><LoginForm locale={locale} /></div>
+          <div className="mt-6"><LoginForm locale={locale} demo={demo} /></div>
         </div>
       </section>
     </main>

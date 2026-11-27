@@ -18,7 +18,8 @@ Both folders have a `Dockerfile`, and DockHosting builds with it when it exists.
 
 1. Create a second project from the same repository, **App folder `web`**.
 2. Variable: `API_URL` = the API's address (`https://<api-address>`), or its private address if DockHosting shows one for linked apps.
-3. Deploy, then open the web address, `/fr/login`: shop `atlas-shop`, user `owner@atlas-shop.test`, password `demo-password` (only if `SEED_DEMO=true`).
+3. Optional, for a public demo: `DEMO_HINT=true` shows the demo login on the login page.
+4. Deploy, then open the web address, `/fr/login`: shop `atlas-shop`, user `owner@atlas-shop.test`, password `demo-password` (only if `SEED_DEMO=true`).
 
 ## Notes
 
